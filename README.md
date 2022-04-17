@@ -33,9 +33,3 @@ DELETE
 The current iteration is just a framework to build upon there are still a lot of logic and understanding of REST API to implement here:
 1.	Building the logic of updating an items number in db if it already exists has not been implemented
 2.	Add ability to update the user profile completely and so much more
-
-
-
-
-# FoodOrderAPI
-# MealOrderAPI
