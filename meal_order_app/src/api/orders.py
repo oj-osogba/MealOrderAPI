@@ -19,7 +19,7 @@ def index():
     """)
 
     order_ids = cur.fetchall()
-    final_dict = {}
+    final_ls = []
     for order_id in order_ids:
         order_id = order_id[-1]
         cur.execute(
@@ -34,13 +34,14 @@ def index():
         int_ls = []
         for record in records:
             int_ls.append({
+                'id': order_id,
                 'name': record[0],
                 'price': str(record[1]),
                 'quantity': record[2]
             })
-        final_dict[str(order_id)] = int_ls
+        final_ls.append(int_ls)
 
-    return jsonify(final_dict)
+    return jsonify(final_ls)
 
 
 @bp.route('', methods=['POST', 'PUT', 'PATCH'])
@@ -145,18 +146,6 @@ def view_order(id):
             'quantity': record[2]
         })
     return jsonify(final_ls)
-
-def serialize_order_records(records):
-    serialized_order_records = {}
-    columns = [
-        'id', 'address_id', 'contact_id', 'name_id', 'payment_id', 'user_id',
-        'delivered_at'
-        'created_at'
-    ]
-    for record in records:
-        for idx, column in enumerate(columns):
-            serialized_order_records[column] = record[idx]
-    return serialized_order_records
 
 
 def validate_item_list(items):

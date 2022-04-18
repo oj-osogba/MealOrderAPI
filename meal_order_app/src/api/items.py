@@ -6,6 +6,17 @@ conn.set_session(autocommit=True)
 bp = Blueprint('items', __name__, url_prefix='/items')
 REQUIRED_KEY_FOR_ITEMS = ['name', 'category', 'quantity_avail', 'image', 'price']
 
+@bp.route('', methods=['GET'])
+def index():
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT * FROM items;
+    """)
+    item_records = cur.fetchall()
+
+    return jsonify(serialize_item_records(item_records))
+
+
 
 @bp.route('', methods=['POST', 'PUT', 'PATCH'])
 def add():
@@ -31,8 +42,21 @@ def add():
                     image = %s;
             """, (name, category, quantity_avail, price, image, category, quantity_avail, price, image)
         )
-    except Exception as e:
-        print(e)
+    except Exception:
         return jsonify(False)
 
     return jsonify(True)
+
+def serialize_item_records(records):
+    serialized_items = []
+    for record in records:
+        serialized_items.append({
+            'id': record[0],
+            'name': record[1],
+            'category': record[2],
+            'quantity': record[3],
+            'price': str(record[4]),
+            'image': record[5],
+        })
+
+    return serialized_items

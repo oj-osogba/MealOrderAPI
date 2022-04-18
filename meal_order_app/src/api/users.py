@@ -117,63 +117,6 @@ def create():
     return jsonify({'id': new_user_id, 'first_name': first_name})
 
 
-# @bp.route('/<int:id>/update_address', methods=['PUT', 'PATCH'])
-# def update_address(id):
-#     if any(key not in request.json for key in REQUIRED_KEY_FOR_ADDRESS):
-#         return abort(400)
-#     address_line_1 = request.json['address_line_1']
-#     state = request.json['state']
-#     city = request.json['city']
-#     zip_code = request.json['zip_code']
-#     address_line_2 = request.json.get('address_line_2')
-
-#     cur = conn.cursor()
-
-#     cur.execute(
-#         """
-#         INSERT INTO addresses(address_line_1, state, city, zip_code, address_line_2)
-#             VALUES (%s, %s, %s, %s, %s)
-#             RETURNING id;
-#     """, (address_line_1, state, city, zip_code, address_line_2))
-
-#     address_id = cur.fetchall()[-1][-1]
-
-#     cur.execute(
-#         """
-#         UPDATE users
-#             SET address_id = %s
-#             WHERE id = %s;
-#     """, (address_id, id))
-
-#     return jsonify({'address_id': address_id})
-
-
-# @bp.route('/<int:id>/add_payment', methods=['POST'])
-# def add_payment(id):
-#     if any(key not in request.json for key in REQUIRED_KEY_FOR_PAYMENTS):
-#         return abort(400)
-#     card_number = request.json['card_number']
-#     expiration_date = request.json['expiration_date']
-#     address_id = request.json['address_id']
-
-#     cur.execute(
-#         """
-#         INSERT INTO payments(card_number, expiration_date, address_id)
-#             VALUES (%s, %s, %s)
-#             RETURNING id;
-#     """, (card_number, expiration_date, address_id))
-
-#     payment_id = cur.fetchall()[-1][-1]
-
-#     cur.execute(
-#         """
-#         INSERT INTO users_payments(payment_id, user_id)
-#             VALUES(%s, %s);
-#     """, (payment_id, id))
-
-#     return jsonify({'payment_id': payment_id})
-
-
 @bp.route('/<int:id>/orders', methods=['GET'])
 def view_orders(id):
     cur = conn.cursor()
@@ -216,7 +159,7 @@ def delete_accout(id):
 def serialize_user_records(records):
     cur = conn.cursor()
 
-    serialized_records = {}
+    serialized_records = []
     for record in records:
         cur.execute("""
         SELECT payment_id FROM users_payments
@@ -232,14 +175,15 @@ def serialize_user_records(records):
         order_records = cur.fetchall()
         orders = [item[-1] for item in order_records]
 
-        serialized_records[str(record[0])] = {
+        serialized_records.append({
+            'id': record[0],
             'name_id': record[2],
             'address_id': record[3],
             'payment_id': payments,
             'order_id': orders,
             'nutritional_rqt_id': record[4],
             'contact_id': record[5],
-        }
+        })
     return serialized_records
 
 

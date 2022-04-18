@@ -21,10 +21,6 @@ SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
---
--- Name: addresses; Type: TABLE; Schema: public; Owner: postgres
---
-
 CREATE TABLE public.addresses (
     id integer NOT NULL,
     address_line_1 text NOT NULL,
@@ -34,13 +30,6 @@ CREATE TABLE public.addresses (
     zip_code integer NOT NULL
 );
 
-
-ALTER TABLE public.addresses OWNER TO postgres;
-
---
--- Name: addresses_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
 CREATE SEQUENCE public.addresses_id_seq
     AS integer
     START WITH 1
@@ -49,32 +38,11 @@ CREATE SEQUENCE public.addresses_id_seq
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER TABLE public.addresses_id_seq OWNER TO postgres;
-
---
--- Name: addresses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.addresses_id_seq OWNED BY public.addresses.id;
-
-
---
--- Name: contacts; Type: TABLE; Schema: public; Owner: postgres
---
-
 CREATE TABLE public.contacts (
     id integer NOT NULL,
     email_address text NOT NULL,
     phone_number text
 );
-
-
-ALTER TABLE public.contacts OWNER TO postgres;
-
---
--- Name: contacts_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
 
 CREATE SEQUENCE public.contacts_id_seq
     AS integer
@@ -83,20 +51,6 @@ CREATE SEQUENCE public.contacts_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
-ALTER TABLE public.contacts_id_seq OWNER TO postgres;
-
---
--- Name: contacts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.contacts_id_seq OWNED BY public.contacts.id;
-
-
---
--- Name: items; Type: TABLE; Schema: public; Owner: postgres
---
 
 CREATE TABLE public.items (
     id integer NOT NULL,
@@ -107,13 +61,6 @@ CREATE TABLE public.items (
     image text NOT NULL
 );
 
-
-ALTER TABLE public.items OWNER TO postgres;
-
---
--- Name: items_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
 CREATE SEQUENCE public.items_id_seq
     AS integer
     START WITH 1
@@ -122,33 +69,12 @@ CREATE SEQUENCE public.items_id_seq
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER TABLE public.items_id_seq OWNER TO postgres;
-
---
--- Name: items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.items_id_seq OWNED BY public.items.id;
-
-
---
--- Name: names; Type: TABLE; Schema: public; Owner: postgres
---
-
 CREATE TABLE public.names (
     id integer NOT NULL,
     first_name text NOT NULL,
     last_name text NOT NULL,
     middle_name text
 );
-
-
-ALTER TABLE public.names OWNER TO postgres;
-
---
--- Name: names_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
 
 CREATE SEQUENCE public.names_id_seq
     AS integer
@@ -158,31 +84,10 @@ CREATE SEQUENCE public.names_id_seq
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER TABLE public.names_id_seq OWNER TO postgres;
-
---
--- Name: names_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.names_id_seq OWNED BY public.names.id;
-
-
---
--- Name: nutritional_rqts; Type: TABLE; Schema: public; Owner: postgres
---
-
 CREATE TABLE public.nutritional_rqts (
     id integer NOT NULL,
     description text NOT NULL
 );
-
-
-ALTER TABLE public.nutritional_rqts OWNER TO postgres;
-
---
--- Name: nutritional_rqts_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
 
 CREATE SEQUENCE public.nutritional_rqts_id_seq
     AS integer
@@ -191,20 +96,6 @@ CREATE SEQUENCE public.nutritional_rqts_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
-ALTER TABLE public.nutritional_rqts_id_seq OWNER TO postgres;
-
---
--- Name: nutritional_rqts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.nutritional_rqts_id_seq OWNED BY public.nutritional_rqts.id;
-
-
---
--- Name: orders; Type: TABLE; Schema: public; Owner: postgres
---
 
 CREATE TABLE public.orders (
     id integer NOT NULL,
@@ -217,13 +108,6 @@ CREATE TABLE public.orders (
     created_at timestamp without time zone DEFAULT now() NOT NULL
 );
 
-
-ALTER TABLE public.orders OWNER TO postgres;
-
---
--- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
 CREATE SEQUENCE public.orders_id_seq
     AS integer
     START WITH 1
@@ -232,20 +116,6 @@ CREATE SEQUENCE public.orders_id_seq
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER TABLE public.orders_id_seq OWNER TO postgres;
-
---
--- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.orders_id_seq OWNED BY public.orders.id;
-
-
---
--- Name: orders_items; Type: TABLE; Schema: public; Owner: postgres
---
-
 CREATE TABLE public.orders_items (
     order_id integer NOT NULL,
     item_id integer NOT NULL,
@@ -253,23 +123,11 @@ CREATE TABLE public.orders_items (
 );
 
 
-ALTER TABLE public.orders_items OWNER TO postgres;
-
---
--- Name: orders_nutritional_rqts; Type: TABLE; Schema: public; Owner: postgres
---
-
 CREATE TABLE public.orders_nutritional_rqts (
     order_id integer NOT NULL,
     nutritional_rqt_id integer NOT NULL
 );
 
-
-ALTER TABLE public.orders_nutritional_rqts OWNER TO postgres;
-
---
--- Name: payments; Type: TABLE; Schema: public; Owner: postgres
---
 
 CREATE TABLE public.payments (
     id integer NOT NULL,
@@ -278,13 +136,6 @@ CREATE TABLE public.payments (
     address_id integer NOT NULL
 );
 
-
-ALTER TABLE public.payments OWNER TO postgres;
-
---
--- Name: payments_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
 CREATE SEQUENCE public.payments_id_seq
     AS integer
     START WITH 1
@@ -292,20 +143,6 @@ CREATE SEQUENCE public.payments_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
-ALTER TABLE public.payments_id_seq OWNER TO postgres;
-
---
--- Name: payments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.payments_id_seq OWNED BY public.payments.id;
-
-
---
--- Name: users; Type: TABLE; Schema: public; Owner: postgres
---
 
 CREATE TABLE public.users (
     id integer NOT NULL,
@@ -316,13 +153,6 @@ CREATE TABLE public.users (
     contact_id integer NOT NULL
 );
 
-
-ALTER TABLE public.users OWNER TO postgres;
-
---
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
 CREATE SEQUENCE public.users_id_seq
     AS integer
     START WITH 1
@@ -332,30 +162,10 @@ CREATE SEQUENCE public.users_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.users_id_seq OWNER TO postgres;
-
---
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
-
-
---
--- Name: users_payments; Type: TABLE; Schema: public; Owner: postgres
---
-
 CREATE TABLE public.users_payments (
     user_id integer NOT NULL,
     payment_id integer NOT NULL
 );
-
-
-ALTER TABLE public.users_payments OWNER TO postgres;
-
---
--- Name: addresses id; Type: DEFAULT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public.addresses ALTER COLUMN id SET DEFAULT nextval('public.addresses_id_seq'::regclass);
 
@@ -407,63 +217,6 @@ ALTER TABLE ONLY public.payments ALTER COLUMN id SET DEFAULT nextval('public.pay
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
-
-
-
---
--- Name: addresses_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.addresses_id_seq', 5, true);
-
-
---
--- Name: contacts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.contacts_id_seq', 6, true);
-
-
---
--- Name: items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.items_id_seq', 2, true);
-
-
---
--- Name: names_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.names_id_seq', 13, true);
-
-
---
--- Name: nutritional_rqts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.nutritional_rqts_id_seq', 1, false);
-
-
---
--- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.orders_id_seq', 3, true);
-
-
---
--- Name: payments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.payments_id_seq', 5, true);
-
-
---
--- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.users_id_seq', 6, true);
 
 
 --
