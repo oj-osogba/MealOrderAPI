@@ -13,22 +13,22 @@ Figure: ERD Diagram for Meal Prep App (Modifications have been made but this hig
 
 API DOCUMENTATION
 GET
-	/users: Get all users 
-	/users/id: Get details with given user id
-	/users/id/orders: get all order id for given user id
-	/orders: get all orders
-	/items: get all items
+/users: Get all users 
+/users/id: Get details with given user id
+/users/id/orders: get all order id for given user id
+/orders: get all orders
+/items: get all items
 POST
-	/users: Create user account
-	/orders: Create order
-	/address: create address
-	/payments: create payment method
+/users: Create user account
+/orders: Create order
+/address: create address
+/payments: create payment method
 
 PUT/PATCH
-	/address: Update address of given user
+/address: Update address of given user
 
 DELETE
-	/users/id: Delete user with given id
+/users/id: Delete user with given id
 
 The current iteration is just a framework to build upon there are still a lot of logic and understanding of REST API to implement here
 
